@@ -11,6 +11,11 @@ import authRoutes from './routes/auth';
 import swaggerUi from 'swagger-ui-express';
 import { swaggerSpec } from './config/swagger';
 import documentRoutes from './routes/documents';
+import './events/admin.events';
+import adminRoutes from './routes/admin';
+import conversationRoutes from './routes/conversations';
+import './events/document.events';
+
 // vitest.setup.ts
 import dotenv from 'dotenv';
 dotenv.config();
@@ -72,7 +77,9 @@ app.use('/api/auth', authRoutes);
 // === ROUTES (mounted here as you build them) ===
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/documents', documentRoutes);
-// app.use('/api/v1/conversations', conversationRoutes);
+app.use('/api/v1/conversations', conversationRoutes);
+app.use('/api/v1/admin', adminRoutes);
+
 
 // === ERROR HANDLER (must be last middleware) ===
 app.use(errorHandler);

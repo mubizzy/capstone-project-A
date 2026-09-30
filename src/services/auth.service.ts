@@ -122,6 +122,20 @@ export async function register(data: {
     },
   });
 
+  // Assign the default role (member) to the new user
+  const defaultRole = await prisma.role.findFirst({
+    where: { isDefault: true },
+  });
+
+  if (defaultRole) {
+    await prisma.userRole.create({
+      data: {
+        userId: user.id,
+        roleId: defaultRole.id,
+      },
+    });
+  }
+
   // Emit and move on. Don't wait for listeners.
   appEvents.emit(AUTH_EVENTS.USER_REGISTERED, {
     id: user.id,
@@ -130,7 +144,7 @@ export async function register(data: {
   });
 
   // Don't return the hash
-  return { id: user.id, email: user.email, tier: user.tier};
+  return { id: user.id, email: user.email, tier: user.tier };
 }
 
 // ── Login ─────────────────────────────────────────────────

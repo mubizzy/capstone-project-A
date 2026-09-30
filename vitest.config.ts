@@ -4,6 +4,7 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'node',
+    fileParallelism: false, // Tests share a database — must run sequentially
     include: ['src/**/*.test.ts','tests/**/*.test.ts'],
     setupFiles: ['./vitest.setup.ts'],
     coverage: {

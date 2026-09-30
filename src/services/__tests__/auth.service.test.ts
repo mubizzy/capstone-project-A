@@ -12,6 +12,29 @@ vi.mock('../../lib/events', () => ({
   },
 }));
 
+// vi.mock('../../lib/prisma', () => ({
+//   prisma: {
+//     user: {
+//       findUnique: vi.fn(),
+//       create: vi.fn(),
+//     },
+//     refreshToken: {
+//       create: vi.fn(),
+//       findUnique: vi.fn(),
+//       delete: vi.fn(),
+//       deleteMany: vi.fn(),
+//     },
+//   },
+// }));
+
+vi.mock('../../lib/logger', () => ({
+  logger: {
+    info: vi.fn(),
+    error: vi.fn(),
+    warn: vi.fn(),
+    debug: vi.fn(),
+  },
+}));
 vi.mock('../../lib/prisma', () => ({
   prisma: {
     user: {
@@ -24,15 +47,12 @@ vi.mock('../../lib/prisma', () => ({
       delete: vi.fn(),
       deleteMany: vi.fn(),
     },
-  },
-}));
-
-vi.mock('../../lib/logger', () => ({
-  logger: {
-    info: vi.fn(),
-    error: vi.fn(),
-    warn: vi.fn(),
-    debug: vi.fn(),
+    role: {
+      findFirst: vi.fn(),
+    },
+    userRole: {
+      create: vi.fn(),
+    },
   },
 }));
 
